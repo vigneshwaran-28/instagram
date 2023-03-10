@@ -4,7 +4,7 @@ const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
 require("dotenv").config({ path: "../../.env" });
 const pool = require("../../models/db");
-const hashTag=require('../../utils/hashTag');
+const hashTagFunction=require('../../utils/hashTag')
 
 let arrImgPost = (req, res) => {
   cloudinary.config({
@@ -52,11 +52,12 @@ let arrImgPost = (req, res) => {
   let resUrl = [];
 
 
-  function updateDb() {
+ async function updateDb() {
     let tags = req.body.tags;
     tags = tags.replace(/\"/g, "");
     tags = tags.split(",");
-    pool.query(
+    let hashtag=hashTagFunction(req.body.caption);
+     pool.query(
       "insert into post(userid,urllink,caption,hashtag,tags,time) values($1,$2,$3,$4,$5,$6)",
       [
         req.userid,
@@ -70,7 +71,6 @@ let arrImgPost = (req, res) => {
         if (err) console.log("error", err);
       }
     );
-      hashTag(req.body.caption);
     res.status(200).json({ message: "post updated successfully!" });
   }
 

@@ -4,7 +4,6 @@ const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
 require("dotenv").config({ path: "../../.env" });
 const pool = require("../../models/db");
-const hashTag=require('../../utils/hashTag');
 
 let arrPostVideo = (req, res) => {
   cloudinary.config({
@@ -70,8 +69,6 @@ let arrPostVideo = (req, res) => {
         if (err) console.log("error", err);
       }
     );
-    hashTag(req.body.caption);
-
     res.status(200).json({ message: "post updated successfully!" });
   }
 

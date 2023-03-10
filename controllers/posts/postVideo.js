@@ -4,7 +4,6 @@ const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
 require("dotenv").config({ path: "../../.env" });
 const pool = require("../../models/db");
-const hashTag=require('../../utils/hashTag');
 
 let postVideo = (req, res) => {
   cloudinary.config({
@@ -69,7 +68,6 @@ let postVideo = (req, res) => {
             new Date(),
           ]
         );
-      hashTag(req.body.caption);
 
         fs.unlinkSync(req.file.path);
         res.status(200).json({ message: "post updated successfully!" });  
