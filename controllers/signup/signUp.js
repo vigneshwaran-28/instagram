@@ -2,7 +2,7 @@ const pool = require("../../models/db");
 const bcrypt = require("bcrypt");
 const createTokens=require('../jwt/createToken');
 
-let addUser = async (req, res) => {
+let signUp = async (req, res) => {
   const { firstdata, fullname, username, password, dob } = req.body;
   let result = firstdata.replace(/\d/g, "");
   result = result ? "email" : "mobnum";
@@ -25,4 +25,4 @@ let addUser = async (req, res) => {
   }
 };
 
-module.exports = addUser;
+module.exports = signUp;

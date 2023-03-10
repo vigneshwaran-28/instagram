@@ -1,10 +1,10 @@
-const signup = require("../controllers/signup/signup");
-const addUser = require("../controllers/signup/addUser");
-const getDob = require("../controllers/signup/signupDob");
+const signUp = require("../controllers/signup/signUp");
+const getDob = require("../controllers/helperFunction/signupDob");
 const getOtp = require("../controllers/helperFunction/otpGeneration");
 const validateEmail = require("../controllers/helperFunction/validateEmail");
 const validateMobNum = require("../controllers/helperFunction/validateMobNum");
 const verifyOtp = require("../controllers/helperFunction/verifyOtp");
+const checkExists=require('../controllers/helperFunction/checkExistInDb');
 const signin = require("../controllers/signin/signin");
 const forgotPassword = require("../controllers/forgotPassword/forgotPassword");
 const resetPassword = require("../controllers/forgotPassword/resetPassword");
@@ -24,22 +24,30 @@ const postVideo=require('../controllers/posts/postVideo');
 const arrPostVideo=require('../controllers/posts/arrPostVideo');
 const postStory=require('../controllers/story/story');
 const highLights=require('../controllers/story/highLights');
+const postlikes=require('../controllers/posts/postlikes');
+const removePostLike=require('../controllers/posts/postUnLike');
+const comments=require('../controllers/posts/comments');
+const updateBio=require('../controllers/profile/updateBio');
+const profileInfo=require('../controllers/profile/profileInfo');
+const savedpost=require('../controllers/profile/savedPost');
+const friendsRequest=require('../controllers/follow/friendsRequest');
+const removeRequest=require('../controllers/follow/removeRequest');
 
 let arr = [
   {
     type: "post",
     endPoint: "/signup",
-    callBack: signup,
-  },
-  {
-    type: "post",
-    endPoint: "/adduser",
-    callBack: addUser,
+    callBack: signUp,
   },
   {
     type: "post",
     endPoint: "/getdob",
     callBack: getDob,
+  },
+  {
+    type: "get",
+    endPoint: "/checkExists",
+    callBack: checkExists,
   },
   {
     type: "post",
@@ -76,7 +84,7 @@ let arr = [
     endPoint: "/resetPassword",
     callBack: resetPassword,
   },{
-    type: "post",
+    type: "post",  
     endPoint: "/follow",
     middleware:[verifyToken],
     callBack: follow,
@@ -150,6 +158,47 @@ let arr = [
     endPoint: "/highLights",
     middleware:[verifyToken],
     callBack: highLights,
+  },{
+    type: "post",
+    endPoint: "/postlikes",
+    middleware:[verifyToken],
+    callBack: postlikes,
+  } ,{
+    type: "delete",
+    endPoint: "/postunlikes",
+    middleware:[verifyToken],
+    callBack: removePostLike,
+  }
+  ,{
+    type: "post",
+    endPoint: "/comments",
+    middleware:[verifyToken],
+    callBack: comments,
+  },{
+    type: "put",
+    endPoint: "/updateBio",
+    middleware:[verifyToken],
+    callBack: updateBio,
+  },{
+    type: "get",
+    endPoint: "/profileInfo",
+    middleware:[verifyToken],
+    callBack: profileInfo,
+  },{
+    type: "post",
+    endPoint: "/savePost",
+    middleware:[verifyToken],
+    callBack: savedpost,
+  },{
+    type: "post",
+    endPoint: "/friendsRequest",
+    middleware:[verifyToken],
+    callBack: friendsRequest,
+  },{
+    type: "delete",
+    endPoint: "/removeRequest",
+    middleware:[verifyToken],
+    callBack: removeRequest,
   }
 ];
 

@@ -1,7 +1,7 @@
 
 let getDob=(req,res)=>{
     let {dob}=req.body;
-    let currentYear=Date.now().getFullYear();
+    let currentYear=new Date().getFullYear();
     let userBirthYear=new Date(dob).getFullYear();
     if(currentYear-userBirthYear>17){
         res.status(200).json({message:"valid user!"});

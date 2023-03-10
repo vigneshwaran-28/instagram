@@ -1,6 +1,10 @@
-let validateMobNum = (num) => {
+let validateMobNum = (req,res) => {
+    let {num}=req.body;
     var ph = new RegExp(/^[6789]\d{9}$/);
-    return ph.test(num);
+    if(ph.test(num))
+    res.status(200).json({mesage:"valid mobile number!"});
+    else
+    res.status(400).json({message:"Invalid mobile Number!"});
 };
 
 module.exports=validateMobNum;

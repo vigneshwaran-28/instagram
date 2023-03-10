@@ -4,6 +4,7 @@ const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
 require("dotenv").config({ path: "../../.env" });
 const pool = require("../../models/db");
+const hashTag=require('../../utils/hashTag');
 
 let postVideo = (req, res) => {
   cloudinary.config({
@@ -11,16 +12,17 @@ let postVideo = (req, res) => {
     api_key: process.env.api_key,
     api_secret: process.env.api_secret,
   });
-
+ 
   const storage = multer.diskStorage({
     destination: "./img",
     filename: function (req, file, cb) {
       let name =
         file.fieldname + "_" + Date.now() + path.extname(file.originalname);
       cb(null, name);
+      console.log("name",name);
     },
   });
-
+  
   const upload = multer({
     storage: storage,
     limits: { fileSize: 1024*1024*10 },
@@ -36,7 +38,6 @@ let postVideo = (req, res) => {
       path.extname(file.originalname).toLowerCase()
     );
     const mimeType = fileTypes.test(file.mimetype);
-
     if (mimeType && extname) {
       return cb(null, true);
     } else {
@@ -57,7 +58,7 @@ let postVideo = (req, res) => {
         tags = tags.split(",");
         let arrUrl=[];
         arrUrl.push(url.url);
-        pool.query(
+        await pool.query(
           "insert into post(userid,urllink,caption,hashtag,tags,time) values($1,$2,$3,$4,$5,$6)",
           [
             req.userid,
@@ -67,14 +68,14 @@ let postVideo = (req, res) => {
             tags,
             new Date(),
           ]
-        )
-        .then(()=>{
-          fs.unlinkSync(req.file.path);
-          res.status(200).json({ message: "post updated successfully!" });  
-        })
-       
+        );
+      hashTag(req.body.caption);
+
+        fs.unlinkSync(req.file.path);
+        res.status(200).json({ message: "post updated successfully!" });  
+     
          } catch (error) {
-        res.status(401).json({ message: "error in uploading post!" });
+        res.status(401).json({ message: "error in uploading video post!" });
       }
     }
   });

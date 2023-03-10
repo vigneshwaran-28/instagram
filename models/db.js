@@ -4,7 +4,7 @@ const credentials = {
     host: "localhost",
     database: "instagram",
     password: "Vignesh@2858",
-    port: 5432,
+    port: 5432
 };
 
 const pool = new Pool(credentials);

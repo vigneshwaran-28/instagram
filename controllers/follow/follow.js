@@ -1,11 +1,11 @@
 const pool = require("../../models/db");
 
 let follow = async (req, res) => {
-  let { followingId } = req.body;
+  let { followerId } = req.body;
   try {
     await pool.query("insert into follow values($1,$2)", [
-      req.userid,
-      followingId,
+      followerId,
+      req.userid
     ]);
     res.status(200).json({ message: "followed successfully!" });
 

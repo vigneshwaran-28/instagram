@@ -4,6 +4,7 @@ const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
 require("dotenv").config({ path: "../../.env" });
 const pool = require("../../models/db");
+const hashTag=require('../../utils/hashTag');
 
 let imgPost = (req, res) => {
   cloudinary.config({
@@ -48,6 +49,7 @@ let imgPost = (req, res) => {
     if (err) res.status(400).json({ message: "Does not match!" });
     else {
       try {
+        // console.log(req.file);
         let url = await cloudinary.uploader.upload(req.file.path, {
           resource_type: "image",
           folder: "Instagram/post/img",
@@ -57,7 +59,7 @@ let imgPost = (req, res) => {
         tags = tags.split(",");
         let arrUrl=[];
         arrUrl.push(url.url);
-        pool.query(
+        await pool.query(
           "insert into post(userid,urllink,caption,hashtag,tags,time) values($1,$2,$3,$4,$5,$6)",
           [
             req.userid,
@@ -67,12 +69,12 @@ let imgPost = (req, res) => {
             tags,
             new Date(),
           ]
-        )
-        .then(()=>{
-          fs.unlinkSync(req.file.path);
-          res.status(200).json({ message: "post updated successfully!" });  
-        })
-       
+        );
+      hashTag(req.body.caption);
+
+        fs.unlinkSync(req.file.path);
+        res.status(200).json({ message: "post updated successfully!" });  
+   
          } catch (error) {
         res.status(401).json({ message: "error in uploading post!" });
       }
