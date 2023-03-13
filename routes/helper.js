@@ -30,6 +30,9 @@ const profileInfo = require("../controllers/profile/profileInfo");
 const savedpost = require("../controllers/profile/savedPost");
 const friendsRequest = require("../controllers/follow/friendsRequest");
 const removeRequest = require("../controllers/follow/removeRequest");
+const accessChat=require('../controllers/message/accessChat');
+const createGroup=require('../controllers/message/createGroupChat');
+const addToGroups=require('../controllers/message/addToGroup');
 
 let arr = [
   {
@@ -210,6 +213,24 @@ let arr = [
     middleware: [verifyToken],
     callBack: removeRequest,
   },
-];
-
+  {
+    type: "get",
+    endPoint: "/accessChat",
+    middleware: [verifyToken],
+    callBack: accessChat,
+  },
+  {
+    type: "post",
+    endPoint: "/createGroup",
+    middleware: [verifyToken],
+    callBack: createGroup,
+  },
+  {  
+    type: "put",
+    endPoint: "/addToGroup",
+    middleware: [verifyToken],
+    callBack: addToGroups,
+  }
+]; 
+  
 module.exports = arr;
