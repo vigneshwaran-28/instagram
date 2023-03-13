@@ -7,4 +7,5 @@ const app = express();
 app.use(express.json());
 app.use(routes);
 const port = process.env.PORT;
-app.listen(port);  
+const server=app.listen(port);  
+module.exports=server;

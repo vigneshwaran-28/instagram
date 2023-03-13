@@ -1,37 +1,35 @@
 const signUp = require("../controllers/signup/signUp");
 const getDob = require("../controllers/helperFunction/signupDob");
 const getOtp = require("../controllers/helperFunction/otpGeneration");
-const validateEmail = require("../controllers/helperFunction/validateEmail");
-const validateMobNum = require("../controllers/helperFunction/validateMobNum");
 const verifyOtp = require("../controllers/helperFunction/verifyOtp");
-const checkExists=require('../controllers/helperFunction/checkExistInDb');
+const checkExists = require("../controllers/helperFunction/checkExistInDb");
 const signin = require("../controllers/signin/signin");
 const forgotPassword = require("../controllers/forgotPassword/forgotPassword");
 const resetPassword = require("../controllers/forgotPassword/resetPassword");
-const verifyToken=require('../middleware/verifyToken');
-const follow=require('../controllers/follow/follow');
-const unfollow=require('../controllers/follow/unfollow');
-const imgUpload=require('../controllers/profilePic/imageUpload');
-const removeImage=require('../controllers/profilePic/removeImage');
-const addCloseFriends=require('../controllers/closeFriends/AddcloseFriend');
-const removeCloseFriend=require('../controllers/closeFriends/removeCloseFriend');
-const addFavourite=require('../controllers/favourites/addFavourite');
-const removeFavourite=require('../controllers/favourites/removeFavourite');
-const signout=require('../controllers/signin/signout');
-const imgpost=require('../controllers/posts/imgPost');
-const arrImgPost=require('../controllers/posts/arrImgPost');
-const postVideo=require('../controllers/posts/postVideo');
-const arrPostVideo=require('../controllers/posts/arrPostVideo');
-const postStory=require('../controllers/story/story');
-const highLights=require('../controllers/story/highLights');
-const postlikes=require('../controllers/posts/postlikes');
-const removePostLike=require('../controllers/posts/postUnLike');
-const comments=require('../controllers/posts/comments');
-const updateBio=require('../controllers/profile/updateBio');
-const profileInfo=require('../controllers/profile/profileInfo');
-const savedpost=require('../controllers/profile/savedPost');
-const friendsRequest=require('../controllers/follow/friendsRequest');
-const removeRequest=require('../controllers/follow/removeRequest');
+const verifyToken = require("../middleware/verifyToken");
+const follow = require("../controllers/follow/follow");
+const unfollow = require("../controllers/follow/unfollow");
+const imgUpload = require("../controllers/profilePic/imageUpload");
+const removeImage = require("../controllers/profilePic/removeImage");
+const addCloseFriends = require("../controllers/closeFriends/AddcloseFriend");
+const removeCloseFriend = require("../controllers/closeFriends/removeCloseFriend");
+const addFavourite = require("../controllers/favourites/addFavourite");
+const removeFavourite = require("../controllers/favourites/removeFavourite");
+const signout = require("../controllers/signin/signout");
+const imgpost = require("../controllers/posts/imgPost");
+const arrImgPost = require("../controllers/posts/arrImgPost");
+const postVideo = require("../controllers/posts/postVideo");
+const arrPostVideo = require("../controllers/posts/arrPostVideo");
+const postStory = require("../controllers/story/story");
+const highLights = require("../controllers/story/highLights");
+const postlikes = require("../controllers/posts/postlikes");
+const removePostLike = require("../controllers/posts/postUnLike");
+const comments = require("../controllers/posts/comments");
+const updateBio = require("../controllers/profile/updateBio");
+const profileInfo = require("../controllers/profile/profileInfo");
+const savedpost = require("../controllers/profile/savedPost");
+const friendsRequest = require("../controllers/follow/friendsRequest");
+const removeRequest = require("../controllers/follow/removeRequest");
 
 let arr = [
   {
@@ -40,7 +38,7 @@ let arr = [
     callBack: signUp,
   },
   {
-    type: "post",
+    type: "get",
     endPoint: "/getdob",
     callBack: getDob,
   },
@@ -50,32 +48,22 @@ let arr = [
     callBack: checkExists,
   },
   {
-    type: "post",
+    type: "get",
     endPoint: "/getotp",
     callBack: getOtp,
   },
   {
-    type: "post",
+    type: "get",
     endPoint: "/signin",
     callBack: signin,
   },
   {
-    type: "post",
-    endPoint: "/validateEmail",
-    callBack: validateEmail,
-  },
-  {
-    type: "post",
-    endPoint: "/validateMobNum",
-    callBack: validateMobNum,
-  },
-  {
-    type: "post",
+    type: "get",
     endPoint: "/verifyOtp",
     callBack: verifyOtp,
   },
   {
-    type: "post",
+    type: "get",
     endPoint: "/forgotPassword",
     callBack: forgotPassword,
   },
@@ -83,124 +71,145 @@ let arr = [
     type: "post",
     endPoint: "/resetPassword",
     callBack: resetPassword,
-  },{
-    type: "post",  
-    endPoint: "/follow",
-    middleware:[verifyToken],
-    callBack: follow,
-  },{
+  },
+  {
     type: "post",
-    endPoint: "/unfollow",
-    middleware:[verifyToken],
+    endPoint: "/follow",
+    middleware: [verifyToken],
+    callBack: follow,
+  },
+  {
+    type: "delete",
+    endPoint: "/follow",
+    middleware: [verifyToken],
     callBack: unfollow,
-  },{
+  },
+  {
     type: "post",
     endPoint: "/uploadProfilePic",
-    middleware:[verifyToken],
+    middleware: [verifyToken],
     callBack: imgUpload,
-  },{
+  },
+  {
     type: "post",
-    endPoint: "/removeProfilePic",
-    middleware:[verifyToken],
+    endPoint: "/profilePic",
+    middleware: [verifyToken],
     callBack: removeImage,
-  },{
-    type: "post",
-    endPoint: "/addCloseFriend",
-    middleware:[verifyToken],
+  },
+  {
+    type: "delete",
+    endPoint: "/profilePic",
+    middleware: [verifyToken],
     callBack: addCloseFriends,
-  },{
-    type: "post",
-    endPoint: "/removeCloseFriend",
-    middleware:[verifyToken],
+  },
+  {
+    type: "delete",
+    endPoint: "/closeFriend",
+    middleware: [verifyToken],
     callBack: removeCloseFriend,
-  },{
+  },
+  {
     type: "post",
-    endPoint: "/addFavourite",
-    middleware:[verifyToken],
+    endPoint: "/favourite",
+    middleware: [verifyToken],
     callBack: addFavourite,
-  },{
-    type: "post",
-    endPoint: "/removeFavourite",
-    middleware:[verifyToken],
+  },
+  {
+    type: "delete",
+    endPoint: "/favourite",
+    middleware: [verifyToken],
     callBack: removeFavourite,
-  },{
-    type: "post",
-    endPoint: "/signout",
-    middleware:[verifyToken],
+  },
+  {
+    type: "delete",
+    endPoint: "/signin",
+    middleware: [verifyToken],
     callBack: signout,
-  },{
+  },
+  {
     type: "post",
     endPoint: "/imgpost",
-    middleware:[verifyToken],
+    middleware: [verifyToken],
     callBack: imgpost,
-  },{
+  },
+  {
     type: "post",
     endPoint: "/arrimgpost",
-    middleware:[verifyToken],
+    middleware: [verifyToken],
     callBack: arrImgPost,
-  },{
+  },
+  {
     type: "post",
     endPoint: "/postVideo",
-    middleware:[verifyToken],
+    middleware: [verifyToken],
     callBack: postVideo,
-  },{
+  },
+  {
     type: "post",
     endPoint: "/arrPostVideo",
-    middleware:[verifyToken],
+    middleware: [verifyToken],
     callBack: arrPostVideo,
-  },{
+  },
+  {
     type: "post",
     endPoint: "/postStory",
-    middleware:[verifyToken],
+    middleware: [verifyToken],
     callBack: postStory,
-  },{
+  },
+  {
     type: "post",
     endPoint: "/highLights",
-    middleware:[verifyToken],
+    middleware: [verifyToken],
     callBack: highLights,
-  },{
+  },
+  {
     type: "post",
-    endPoint: "/postlikes",
-    middleware:[verifyToken],
+    endPoint: "/postlike",
+    middleware: [verifyToken],
     callBack: postlikes,
-  } ,{
+  },
+  {
     type: "delete",
-    endPoint: "/postunlikes",
-    middleware:[verifyToken],
+    endPoint: "/postlike",
+    middleware: [verifyToken],
     callBack: removePostLike,
-  }
-  ,{
+  },
+  {
     type: "post",
     endPoint: "/comments",
-    middleware:[verifyToken],
+    middleware: [verifyToken],
     callBack: comments,
-  },{
+  },
+  {
     type: "put",
     endPoint: "/updateBio",
-    middleware:[verifyToken],
+    middleware: [verifyToken],
     callBack: updateBio,
-  },{
+  },
+  {
     type: "get",
     endPoint: "/profileInfo",
-    middleware:[verifyToken],
+    middleware: [verifyToken],
     callBack: profileInfo,
-  },{
+  },
+  {
     type: "post",
     endPoint: "/savePost",
-    middleware:[verifyToken],
+    middleware: [verifyToken],
     callBack: savedpost,
-  },{
+  },
+  {
     type: "post",
     endPoint: "/friendsRequest",
-    middleware:[verifyToken],
+    middleware: [verifyToken],
     callBack: friendsRequest,
-  },{
+  },
+  {
     type: "delete",
-    endPoint: "/removeRequest",
-    middleware:[verifyToken],
+    endPoint: "/friendsRequest",
+    middleware: [verifyToken],
     callBack: removeRequest,
-  }
+  },
 ];
 
 module.exports = arr;
-  

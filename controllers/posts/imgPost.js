@@ -4,6 +4,7 @@ const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
 require("dotenv").config({ path: "../../.env" });
 const pool = require("../../models/db");
+const hashTagFunction=require('../../utils/hashTag')
 
 let imgPost = (req, res) => {
   cloudinary.config({
@@ -55,16 +56,17 @@ let imgPost = (req, res) => {
         });
         let tags = req.body.tags;
         tags = tags.replace(/\"/g, "");
-        tags = tags.split(",");
+    let hashtag=hashTagFunction(req.body.caption);
+    tags = tags.split(",");
         let arrUrl=[];
         arrUrl.push(url.url);
         await pool.query(
-          "insert into post(userid,urllink,caption,hashtag,tags,time) values($1,$2,$3,$4,$5,$6)",
+          "insert into post(userid,urllink,caption,hashtagcontent,tags,time) values($1,$2,$3,$4,$5,$6)",
           [
             req.userid,
             arrUrl,
             req.body.caption,
-            req.body.hashtag,
+            hashtag,
             tags,
             new Date(),
           ]

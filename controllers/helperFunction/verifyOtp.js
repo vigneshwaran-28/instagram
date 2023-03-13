@@ -6,6 +6,7 @@ let verifyOtp=async(req,res)=>{
     try {
         userOtp=await pool.query('select * from otp where email=$1',[email]);
         if(userOtp.rows[0].otp==requestOtp){
+            await pool.query("delete from otp where email=$1",[email]);
             res.status(200).json({message:"valid user!"});
             return;
         }

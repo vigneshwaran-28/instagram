@@ -58,12 +58,12 @@ let arrImgPost = (req, res) => {
     tags = tags.split(",");
     let hashtag=hashTagFunction(req.body.caption);
      pool.query(
-      "insert into post(userid,urllink,caption,hashtag,tags,time) values($1,$2,$3,$4,$5,$6)",
+      "insert into post(userid,urllink,caption,hashtagcontent,tags,time) values($1,$2,$3,$4,$5,$6)",
       [
         req.userid,
         resUrl,
         req.body.caption,
-        req.body.hashtag,
+        hashtag,
         tags,
         new Date(),
       ],

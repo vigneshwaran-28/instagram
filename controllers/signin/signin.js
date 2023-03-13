@@ -1,7 +1,7 @@
 const pool = require("../../models/db");
 const bcrypt = require("bcrypt");
-const validateEmail = require("../helperFunction/validateEmail");
-const validateMobNum = require("../helperFunction/validateMobNum");
+const validateEmail = require("../../utils/validateEmail");
+const validateMobNum = require("../../utils/validateMobNum");
 const createToken = require("../jwt/createToken");
 
 let signin = async (req, res) => {
