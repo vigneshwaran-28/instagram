@@ -6,7 +6,7 @@ let follow = async (req, res) => {
     await pool.query("insert into follow values($1,$2)", [
       followerId,
       req.userid
-    ]);
+    ]); 
     res.status(200).json({ message: "followed successfully!" });
 
   } catch (error) {

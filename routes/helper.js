@@ -33,6 +33,8 @@ const removeRequest = require("../controllers/follow/removeRequest");
 const accessChat=require('../controllers/message/accessChat');
 const createGroup=require('../controllers/message/createGroupChat');
 const addToGroups=require('../controllers/message/addToGroup');
+const removeFromGroup=require('../controllers/message/removeFromGroup');
+const renameGroup=require('../controllers/message/renameGroup');
 
 let arr = [
   {
@@ -225,11 +227,23 @@ let arr = [
     middleware: [verifyToken],
     callBack: createGroup,
   },
-  {  
-    type: "put",
-    endPoint: "/addToGroup",
+  {
+    type: "post",
+    endPoint: "/addRemoveGroup",
     middleware: [verifyToken],
     callBack: addToGroups,
+  },
+  {
+    type: "delete",
+    endPoint: "/addRemoveGroup",
+    middleware: [verifyToken],
+    callBack: removeFromGroup,
+  },
+  {
+    type: "put",
+    endPoint: "/renameGroup",
+    middleware: [verifyToken],
+    callBack: renameGroup,
   }
 ]; 
   

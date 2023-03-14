@@ -2,11 +2,10 @@ const pool = require("../../models/db");
 
 const createGroup = async (req, res) => {
   try {
-    let { groupname, groupmembers } = req.body;
-    let arr=groupmembers.split(',');
+    let { groupname } = req.body;
     await pool.query(
-      "insert into groups(userid,groupname,groupmembers,time) values($1,$2,$3,now())",
-      [req.userid, groupname,arr]
+      "insert into groups(userid,groupname,time) values($1,$2,now())",
+      [req.userid, groupname]
     );
     res.status(200).json({ message: "group created successfully!" });
   } catch (error) {
