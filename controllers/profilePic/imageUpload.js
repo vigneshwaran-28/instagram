@@ -54,8 +54,7 @@ function checkFileType(file,cb){
                           resource_type: "image",
                           folder : "Instagram/profilePic",
                         });
-                await pool.query('insert into profile(userid,photourl) values($1,$2)',[req.userid,url.url])
-                // console.log("hi");
+                await pool.query('insert into profile(userid,photourl) values($1,$2)',[req.userid,url.url]);
                 fs.unlinkSync(req.file.path);
                 res.status(200).json({message:"profile updated successfully!"});
             } catch (error) {

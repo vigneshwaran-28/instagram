@@ -91,19 +91,19 @@ let arr = [
   },
   {
     type: "post",
-    endPoint: "/uploadProfilePic",
+    endPoint: "/profilePic",
     middleware: [verifyToken],
     callBack: imgUpload,
   },
   {
-    type: "post",
+    type: "delete",
     endPoint: "/profilePic",
     middleware: [verifyToken],
     callBack: removeImage,
   },
   {
-    type: "delete",
-    endPoint: "/profilePic",
+    type: "post",
+    endPoint: "/closeFriend",
     middleware: [verifyToken],
     callBack: addCloseFriends,
   },
@@ -244,7 +244,7 @@ let arr = [
     endPoint: "/renameGroup",
     middleware: [verifyToken],
     callBack: renameGroup,
-  }
+  },
 ]; 
   
 module.exports = arr;
