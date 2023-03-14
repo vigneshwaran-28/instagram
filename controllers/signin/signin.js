@@ -10,7 +10,7 @@ let signin = async (req, res) => {
     ? "email"
     : validateMobNum(firstdata)
     ? "mobnum"
-    : "username";
+    : "username";   
   try {
     let hashPass = await pool.query(
       "select password from userdetails where " + result + "=$1",
