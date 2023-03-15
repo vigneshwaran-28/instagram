@@ -49,6 +49,7 @@ const removeSavedPost=require('../controllers/profile/removeSavedPost');
 const deletePost=require('../controllers/posts/deletePost');
 const getProfilePhoto=require('../controllers/profilePic/getProfile');
 const deleteChat=require('../controllers/message/deleteChat');
+const updateUsername=require('../controllers/profile/updateUsername');
 
 let arr = [
   {
@@ -89,6 +90,7 @@ let arr = [
   {
     type: "post",
     endPoint: "/resetPassword",
+    middleware: [verifyToken],
     callBack: resetPassword,
   },
   {
@@ -342,6 +344,12 @@ let arr = [
     endPoint: "/accessChat",
     middleware: [verifyToken],
     callBack: deleteChat,
+  },
+  {
+    type: "put",
+    endPoint: "/updateUsername",
+    middleware: [verifyToken],
+    callBack: updateUsername,
   },
 ]; 
   

@@ -132,3 +132,14 @@ userdetails table
 
 //call,apply,bind
 // javascript info object methods
+let a={
+  num:10
+}
+
+let b=a;
+b.g=60;
+console.log(b);
+delete b.num;
+console.log(b,a);
+
+console.log(a===b);
