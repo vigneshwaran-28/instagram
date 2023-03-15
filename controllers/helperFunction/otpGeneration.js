@@ -31,9 +31,9 @@ function getOtp(req, res) {
     if (err) {
       res.status(400).json({ message: "Error occured in sending mail" });
     } else {
-      res.status(200).json({ message: "Email sent successfully" });
       try {
         await pool.query("insert into otp values($1,$2)", [email, otp]);
+        res.status(200).json({ message: "Email sent successfully" });
       } catch (error) {
         console.log("error occured in inserting values!", error);
       }

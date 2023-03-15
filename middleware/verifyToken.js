@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config({ path: "../.env" });
-const pool=require('../models/db');
+const pool = require("../models/db");
 
 let verifyToken = (req, res, next) => {
   let token = req.headers.authorization.split(" ")[1];
@@ -15,26 +15,25 @@ let verifyToken = (req, res, next) => {
           if (result) {
             await pool.query(
               "select userid from userdetails where username=$1",
-              [data],(error,tableOutput)=>{
-                if(error){
-          res.status(400).json({ message: "error while inserting data!"});
-                   
-                }
-                else{
-                    req.userid = tableOutput.rows[0].userid;
-                    next();
+              [data],
+              (error, tableOutput) => {
+                if (error) {
+                  res
+                    .status(400)
+                    .json({ message: "error while inserting data!" });
+                } else {
+                  req.userid = tableOutput.rows[0].userid;
+                  next();
                 }
               }
             );
-          }
-          else{
+          } else {
             req.userid = output.userid;
             next();
           }
         } catch (error) {
-          res.status(400).json({ message: "error while inserting data!"});
+          res.status(400).json({ message: "error while inserting data!" });
         }
-       
       }
     });
   } else {

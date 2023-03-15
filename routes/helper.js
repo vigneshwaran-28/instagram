@@ -35,6 +35,13 @@ const createGroup=require('../controllers/message/createGroupChat');
 const addToGroups=require('../controllers/message/addToGroup');
 const removeFromGroup=require('../controllers/message/removeFromGroup');
 const renameGroup=require('../controllers/message/renameGroup');
+const retreiveComment=require('../controllers/posts/retreiveComments');
+const likeComment=require('../controllers/posts/likeComments');
+const unLikeComment=require('../controllers/posts/unLikeComment');
+const deleteComment=require('../controllers/posts/deleteComment');
+const retreivePost=require('../controllers/posts/getPost');
+const getFollowers=require('../controllers/follow/getFollowers');
+const getFollowing=require('../controllers/follow/getFollowing');
 
 let arr = [
   {
@@ -244,6 +251,48 @@ let arr = [
     endPoint: "/renameGroup",
     middleware: [verifyToken],
     callBack: renameGroup,
+  },
+  {
+    type: "get",
+    endPoint: "/retreiveComment",
+    middleware: [verifyToken],
+    callBack: retreiveComment,
+  },
+  {
+    type: "put",
+    endPoint: "/likeComment",
+    middleware: [verifyToken],
+    callBack: likeComment,
+  },
+  {
+    type: "delete",
+    endPoint: "/likeComment",
+    middleware: [verifyToken],
+    callBack: unLikeComment,
+  },
+  {
+    type: "delete",
+    endPoint: "/deleteComment",
+    middleware: [verifyToken],
+    callBack: deleteComment,
+  },
+  {
+    type: "get",
+    endPoint: "/retreivePost",
+    middleware: [verifyToken],
+    callBack: retreivePost,
+  },
+  {
+    type: "get",
+    endPoint: "/getFollowers",
+    middleware: [verifyToken],
+    callBack: getFollowers,
+  },
+  {
+    type: "get",
+    endPoint: "/getFollowing",
+    middleware: [verifyToken],
+    callBack: getFollowing,
   },
 ]; 
   

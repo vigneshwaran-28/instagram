@@ -1,4 +1,5 @@
 let pool = require("../../models/db");
+const bcrypt = require("bcrypt");
 
 let resetPassword=async(req,res)=>{
     let {reqEmail,reqPass,reqConfirmPass}=req.body;
@@ -7,8 +8,8 @@ let resetPassword=async(req,res)=>{
         return;
     }
     try {
-        await pool.query('update userdetails set password=$1 where email=$2',[reqPass,reqEmail]);
-        await pool.query('delete from otp where email=$1',[reqEmail]);
+  let hashPass = await bcrypt.hash(reqPass, 5);
+        await pool.query('update userdetails set password=$1 where email=$2',[hashPass,reqEmail]);
         res.status(200).json({message:"password updated successfully!"});
     } catch (error) {
         res.status(400).json({message:"Error!"});

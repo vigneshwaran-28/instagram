@@ -1,24 +1,11 @@
 const pool = require("../../models/db");
 
 let unfollow = async (req, res) => {
-  let { unfollowingId } = req.body;
-  let data = req.userid;
+  let { followerId } = req.body;
   try {
-    let result = data.toString().replace(/\d/g, "");
- 
-    let userid = data;
-
-    if (result) {
-      userid = await pool.query(
-        "select userid from userdetails where username=$1",
-        [data]
-      );
-    }
-    if(result)
-    req.userid = userid.rows[0].userid;
     await pool.query("delete from follow where followerid=$1 and followingid=$2", [
+        followerId,
         req.userid,
-        unfollowingId
     ]);
     res.status(200).json({ message: "unfollowed successfully!" });
   } catch (error) {
