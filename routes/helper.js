@@ -42,6 +42,13 @@ const deleteComment=require('../controllers/posts/deleteComment');
 const retreivePost=require('../controllers/posts/getPost');
 const getFollowers=require('../controllers/follow/getFollowers');
 const getFollowing=require('../controllers/follow/getFollowing');
+const getFavourites=require('../controllers/favourites/getFavourites');
+const getCloseFriends=require('../controllers/closeFriends/getCloseFriend');
+const deleteGroup=require('../controllers/message/deleteGroup');
+const removeSavedPost=require('../controllers/profile/removeSavedPost');
+const deletePost=require('../controllers/posts/deletePost');
+const getProfilePhoto=require('../controllers/profilePic/getProfile');
+const deleteChat=require('../controllers/message/deleteChat');
 
 let arr = [
   {
@@ -293,6 +300,48 @@ let arr = [
     endPoint: "/getFollowing",
     middleware: [verifyToken],
     callBack: getFollowing,
+  },
+  {
+    type: "get",
+    endPoint: "/getFavourites",
+    middleware: [verifyToken],
+    callBack: getFavourites,
+  },
+  {
+    type: "get",
+    endPoint: "/getCloseFriends",
+    middleware: [verifyToken],
+    callBack: getCloseFriends,
+  },
+  {
+    type: "delete",
+    endPoint: "/deleteGroups",
+    middleware: [verifyToken],
+    callBack: deleteGroup,
+  },
+  {
+    type: "delete",
+    endPoint: "/savePost",
+    middleware: [verifyToken],
+    callBack: removeSavedPost,
+  },
+  {
+    type: "delete",
+    endPoint: "/deletePost",
+    middleware: [verifyToken],
+    callBack: deletePost,
+  },
+  {
+    type: "get",
+    endPoint: "/profilePic",
+    middleware: [verifyToken],
+    callBack: getProfilePhoto,
+  },
+  {
+    type: "delete",
+    endPoint: "/accessChat",
+    middleware: [verifyToken],
+    callBack: deleteChat,
   },
 ]; 
   
