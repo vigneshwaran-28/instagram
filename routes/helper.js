@@ -50,6 +50,24 @@ const deletePost=require('../controllers/posts/deletePost');
 const getProfilePhoto=require('../controllers/profilePic/getProfile');
 const deleteChat=require('../controllers/message/deleteChat');
 const updateUsername=require('../controllers/profile/updateUsername');
+const storeChat=require('../controllers/message/storeMessage');
+const getHistory=require('../controllers/history/accessHistory');
+
+//api for uploading users for instagram
+const uploadMusic=require('../controllers/music/uploadMusic');
+
+const getMusic=require('../controllers/music/getMusic');
+const setActive=require('../middleware/setActive');
+const setDeActive=require('../middleware/setDeactive');
+const loginTime=require('../middleware/loginTime');
+const storyLikes=require('../controllers/story/storyLikes');
+const storyUnLikes=require('../controllers/story/storyDislikes');
+const storyViewers=require('../controllers/story/storyViewers');
+const getStory = require("../controllers/story/getStory");
+const deleteStory=require('../controllers/story/deleteStory');
+const publictype=require('../controllers/profile/publicType');
+const privatetype=require('../controllers/profile/privateType');
+const homePagePost=require('../controllers/homePage/getPost');
 
 let arr = [
   {
@@ -350,6 +368,97 @@ let arr = [
     endPoint: "/updateUsername",
     middleware: [verifyToken],
     callBack: updateUsername,
+  },
+  {
+    type: "post",
+    endPoint: "/storeChat",
+    middleware: [verifyToken],
+    callBack: storeChat,
+  },
+  {
+    type: "get",
+    endPoint: "/getHistory",
+    middleware: [verifyToken],
+    callBack: getHistory,
+  },
+  {
+    //upload music for instagram
+    type: "post",
+    endPoint: "/uploadMusic",
+    middleware: [verifyToken],
+    callBack: uploadMusic,
+  },
+  {
+    type: "get",
+    endPoint: "/getMusic",
+    middleware: [verifyToken],
+    callBack: getMusic,
+  },
+  {
+    type: "put",
+    endPoint: "/setActive",
+    middleware: [verifyToken],
+    callBack: setActive,
+  },
+  {
+    type: "delete",
+    endPoint: "/setActive",
+    middleware: [verifyToken],
+    callBack: setDeActive,
+  },
+  {
+    type: "put",
+    endPoint: "/loginTime",
+    middleware: [verifyToken],
+    callBack: loginTime,
+  },
+  {
+    type: "put",
+    endPoint: "/likesDislikesStory",
+    middleware: [verifyToken],
+    callBack: storyLikes,
+  },
+  {
+    type: "delete",
+    endPoint: "/likesDislikesStory",
+    middleware: [verifyToken],
+    callBack: storyUnLikes,
+  },
+  {
+    type: "post",
+    endPoint: "/storyViewers",
+    middleware: [verifyToken],
+    callBack: storyViewers,
+  },
+  {
+    type: "get",
+    endPoint: "/getStory",
+    middleware: [verifyToken],
+    callBack: getStory,
+  },
+  {
+    type: "delete",
+    endPoint: "/deleteStory",
+    middleware: [verifyToken],
+    callBack: deleteStory,
+  },
+  {
+    type: "put",
+    endPoint: "/publicType",
+    middleware: [verifyToken],
+    callBack: publictype,
+  },
+  {
+    type: "delete",
+    endPoint: "/publicType",
+    middleware: [verifyToken],
+    callBack: privatetype,
+  },
+  {
+    type: "get",
+    endPoint: "/homePost",
+    middleware: [verifyToken],
+    callBack: homePagePost,
   },
 ]; 
   
