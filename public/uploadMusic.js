@@ -2,8 +2,8 @@ const multer = require("multer");
 const path = require("path");
 const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
-require("dotenv").config({ path: "../../.env" });
-const pool = require("../../models/db");
+require("dotenv").config({ path: "../.env" });
+const pool = require("../models/db");
 
 let uploadMusic = (req, res) => {
   cloudinary.config({

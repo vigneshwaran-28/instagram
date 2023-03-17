@@ -54,7 +54,7 @@ const storeChat = require("../controllers/message/storeMessage");
 const getHistory = require("../controllers/history/accessHistory");
 
 //api for uploading users for instagram
-const uploadMusic = require("../controllers/music/uploadMusic");
+const uploadMusic = require("../public/uploadMusic");
 
 const getMusic = require("../controllers/music/getMusic");
 const setActive = require("../middleware/setActive");
@@ -63,11 +63,13 @@ const loginTime = require("../middleware/loginTime");
 const storyLikes = require("../controllers/story/storyLikes");
 const storyUnLikes = require("../controllers/story/storyDislikes");
 const storyViewers = require("../controllers/story/storyViewers");
-const getStory = require("../controllers/story/getStory");
+const getStory = require("../controllers/homePage/getStory");
 const deleteStory = require("../controllers/story/deleteStory");
 const publictype = require("../controllers/profile/publicType");
 const privatetype = require("../controllers/profile/privateType");
 const homePagePost = require("../controllers/homePage/getPost");
+const getEmoji = require("../public/getEmoji");
+const fetchUserStory=require('../controllers/story/fetchUserStory');
 
 let arr = [
   {
@@ -459,6 +461,18 @@ let arr = [
     endPoint: "/homePost",
     middleware: [verifyToken],
     callBack: homePagePost,
+  },
+  {
+    type: "get",
+    endPoint: "/getEmoji",
+    middleware: [verifyToken],
+    callBack: getEmoji,
+  },
+  {
+    type: "get",
+    endPoint: "/fetchUserStory",
+    middleware: [verifyToken],
+    callBack: fetchUserStory,
   },
 ];
 
