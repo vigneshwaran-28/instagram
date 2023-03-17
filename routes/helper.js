@@ -30,44 +30,44 @@ const profileInfo = require("../controllers/profile/profileInfo");
 const savedpost = require("../controllers/profile/savedPost");
 const friendsRequest = require("../controllers/follow/friendsRequest");
 const removeRequest = require("../controllers/follow/removeRequest");
-const accessChat=require('../controllers/message/accessChat');
-const createGroup=require('../controllers/message/createGroupChat');
-const addToGroups=require('../controllers/message/addToGroup');
-const removeFromGroup=require('../controllers/message/removeFromGroup');
-const renameGroup=require('../controllers/message/renameGroup');
-const retreiveComment=require('../controllers/posts/retreiveComments');
-const likeComment=require('../controllers/posts/likeComments');
-const unLikeComment=require('../controllers/posts/unLikeComment');
-const deleteComment=require('../controllers/posts/deleteComment');
-const retreivePost=require('../controllers/posts/getPost');
-const getFollowers=require('../controllers/follow/getFollowers');
-const getFollowing=require('../controllers/follow/getFollowing');
-const getFavourites=require('../controllers/favourites/getFavourites');
-const getCloseFriends=require('../controllers/closeFriends/getCloseFriend');
-const deleteGroup=require('../controllers/message/deleteGroup');
-const removeSavedPost=require('../controllers/profile/removeSavedPost');
-const deletePost=require('../controllers/posts/deletePost');
-const getProfilePhoto=require('../controllers/profilePic/getProfile');
-const deleteChat=require('../controllers/message/deleteChat');
-const updateUsername=require('../controllers/profile/updateUsername');
-const storeChat=require('../controllers/message/storeMessage');
-const getHistory=require('../controllers/history/accessHistory');
+const accessChat = require("../controllers/message/accessChat");
+const createGroup = require("../controllers/message/createGroupChat");
+const addToGroups = require("../controllers/message/addToGroup");
+const removeFromGroup = require("../controllers/message/removeFromGroup");
+const renameGroup = require("../controllers/message/renameGroup");
+const retreiveComment = require("../controllers/posts/retreiveComments");
+const likeComment = require("../controllers/posts/likeComments");
+const unLikeComment = require("../controllers/posts/unLikeComment");
+const deleteComment = require("../controllers/posts/deleteComment");
+const retreivePost = require("../controllers/posts/getPost");
+const getFollowers = require("../controllers/follow/getFollowers");
+const getFollowing = require("../controllers/follow/getFollowing");
+const getFavourites = require("../controllers/favourites/getFavourites");
+const getCloseFriends = require("../controllers/closeFriends/getCloseFriend");
+const deleteGroup = require("../controllers/message/deleteGroup");
+const removeSavedPost = require("../controllers/profile/removeSavedPost");
+const deletePost = require("../controllers/posts/deletePost");
+const getProfilePhoto = require("../controllers/profilePic/getProfile");
+const deleteChat = require("../controllers/message/deleteChat");
+const updateUsername = require("../controllers/profile/updateUsername");
+const storeChat = require("../controllers/message/storeMessage");
+const getHistory = require("../controllers/history/accessHistory");
 
 //api for uploading users for instagram
-const uploadMusic=require('../controllers/music/uploadMusic');
+const uploadMusic = require("../controllers/music/uploadMusic");
 
-const getMusic=require('../controllers/music/getMusic');
-const setActive=require('../middleware/setActive');
-const setDeActive=require('../middleware/setDeactive');
-const loginTime=require('../middleware/loginTime');
-const storyLikes=require('../controllers/story/storyLikes');
-const storyUnLikes=require('../controllers/story/storyDislikes');
-const storyViewers=require('../controllers/story/storyViewers');
+const getMusic = require("../controllers/music/getMusic");
+const setActive = require("../middleware/setActive");
+const setDeActive = require("../middleware/setDeactive");
+const loginTime = require("../middleware/loginTime");
+const storyLikes = require("../controllers/story/storyLikes");
+const storyUnLikes = require("../controllers/story/storyDislikes");
+const storyViewers = require("../controllers/story/storyViewers");
 const getStory = require("../controllers/story/getStory");
-const deleteStory=require('../controllers/story/deleteStory');
-const publictype=require('../controllers/profile/publicType');
-const privatetype=require('../controllers/profile/privateType');
-const homePagePost=require('../controllers/homePage/getPost');
+const deleteStory = require("../controllers/story/deleteStory");
+const publictype = require("../controllers/profile/publicType");
+const privatetype = require("../controllers/profile/privateType");
+const homePagePost = require("../controllers/homePage/getPost");
 
 let arr = [
   {
@@ -460,6 +460,6 @@ let arr = [
     middleware: [verifyToken],
     callBack: homePagePost,
   },
-]; 
-  
+];
+
 module.exports = arr;

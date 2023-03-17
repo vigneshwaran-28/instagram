@@ -34,7 +34,7 @@ let uploadMusic = (req, res) => {
 
     const extname = fileTypes.test(
       path.extname(file.originalname).toLowerCase()
-  );
+    );
     const mimeType = fileTypes.test(file.mimetype);
 
     if (mimeType && extname) {
@@ -46,17 +46,16 @@ let uploadMusic = (req, res) => {
 
   upload(req, res, async (err) => {
     if (err) {
-        console.log(req.file,err);
-res.status(400).json({ message: "Does not match!" });
-    }
-    else {
+      console.log(req.file, err);
+      res.status(400).json({ message: "Does not match!" });
+    } else {
       try {
         // console.log(req.file);
         let url = await cloudinary.uploader.upload(req.file.path, {
           resource_type: "auto",
           folder: "Instagram/music",
         });
-        await pool.query('insert into music(musiclink) values($1)',[url.url]);
+        await pool.query("insert into music(musiclink) values($1)", [url.url]);
         fs.unlinkSync(req.file.path);
         res.status(200).json({ message: "music updated successfully!" });
       } catch (error) {

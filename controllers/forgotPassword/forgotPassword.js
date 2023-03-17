@@ -10,7 +10,6 @@ let forgotPassword = async (req, res) => {
     ? "mobnum"
     : "username";
   try {
-
     let resultData = await pool.query(
       "select email from userdetails where " + result + "=$1",
       [firstdata]

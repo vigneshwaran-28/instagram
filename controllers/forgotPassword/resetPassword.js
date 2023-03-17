@@ -16,7 +16,7 @@ let resetPassword = async (req, res) => {
     console.log(req.userid);
     await pool.query(
       "insert into history(userid,password,time) values($1,$2,now())",
-      [req.userid,hashPass]
+      [req.userid, hashPass]
     );
 
     res.status(200).json({ message: "password updated successfully!" });

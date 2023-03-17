@@ -4,7 +4,7 @@ const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
 require("dotenv").config({ path: "../../.env" });
 const pool = require("../../models/db");
-const hashTagFunction=require('../../utils/hashTag')
+const hashTagFunction = require("../../utils/hashTag");
 
 let arrImgPost = (req, res) => {
   cloudinary.config({
@@ -51,22 +51,14 @@ let arrImgPost = (req, res) => {
   }
   let resUrl = [];
 
-
- async function updateDb() {
+  async function updateDb() {
     let tags = req.body.tags;
     tags = tags.replace(/\"/g, "");
     tags = tags.split(",");
-    let hashtag=hashTagFunction(req.body.caption);
-     pool.query(
+    let hashtag = hashTagFunction(req.body.caption);
+    pool.query(
       "insert into post(userid,urllink,caption,hashtagcontent,tags,time) values($1,$2,$3,$4,$5,$6)",
-      [
-        req.userid,
-        resUrl,
-        req.body.caption,
-        hashtag,
-        tags,
-        new Date(),
-      ],
+      [req.userid, resUrl, req.body.caption, hashtag, tags, new Date()],
       (err, response) => {
         if (err) console.log("error", err);
       }
@@ -74,15 +66,14 @@ let arrImgPost = (req, res) => {
     res.status(200).json({ message: "post updated successfully!" });
   }
 
- async function uploadFiles(files){
+  async function uploadFiles(files) {
     for (let file of files) {
-     let url=await cloudinary.uploader
-        .upload(file.path, {
-          resource_type: "image",
-          folder: "Instagram/post/img",
-        });
-        resUrl.push(url.url);
-        fs.unlinkSync(file.path);
+      let url = await cloudinary.uploader.upload(file.path, {
+        resource_type: "image",
+        folder: "Instagram/post/img",
+      });
+      resUrl.push(url.url);
+      fs.unlinkSync(file.path);
     }
   }
 

@@ -5,7 +5,7 @@ const deleteStory = async (req, res) => {
     // console.log(req.userid, req.body.storyid);
     await pool.query("delete from archieve where userid=$1 and storyid=$2", [
       req.userid,
-      req.body.storyid
+      req.body.storyid,
     ]);
     res.status(200).json({ message: "Story deleted!" });
   } catch (error) {

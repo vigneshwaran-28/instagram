@@ -4,7 +4,7 @@ const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
 require("dotenv").config({ path: "../../.env" });
 const pool = require("../../models/db");
-const hashTagFunction=require('../../utils/hashTag')
+const hashTagFunction = require("../../utils/hashTag");
 
 let imgPost = (req, res) => {
   cloudinary.config({
@@ -24,7 +24,7 @@ let imgPost = (req, res) => {
 
   const upload = multer({
     storage: storage,
-    limits: { fileSize: 1024*1024*5 },
+    limits: { fileSize: 1024 * 1024 * 5 },
     fileFilter: function (req, file, cb) {
       checkFileType(file, cb);
     },
@@ -55,25 +55,17 @@ let imgPost = (req, res) => {
         });
         let tags = req.body.tags;
         tags = tags.replace(/\"/g, "");
-    let hashtag=hashTagFunction(req.body.caption);
-    tags = tags.split(",");
-        let arrUrl=[];
+        let hashtag = hashTagFunction(req.body.caption);
+        tags = tags.split(",");
+        let arrUrl = [];
         arrUrl.push(url.url);
         await pool.query(
           "insert into post(userid,urllink,caption,hashtagcontent,tags,time) values($1,$2,$3,$4,$5,$6)",
-          [
-            req.userid,
-            arrUrl,
-            req.body.caption,
-            hashtag,
-            tags,
-            new Date(),
-          ]
+          [req.userid, arrUrl, req.body.caption, hashtag, tags, new Date()]
         );
         fs.unlinkSync(req.file.path);
-        res.status(200).json({ message: "post updated successfully!" });  
-   
-         } catch (error) {
+        res.status(200).json({ message: "post updated successfully!" });
+      } catch (error) {
         res.status(401).json({ message: "error in uploading post!" });
       }
     }

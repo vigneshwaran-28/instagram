@@ -2,7 +2,7 @@ const pool = require("../../models/db");
 
 const storyDisLikes = async (req, res) => {
   try {
-    let {storyId } = req.body;
+    let { storyId } = req.body;
     await pool.query("update archieve set likes=likes-1 where storyid=$1", [
       storyId,
     ]);

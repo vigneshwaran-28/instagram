@@ -14,14 +14,17 @@ let signUp = async (req, res) => {
         ",fullname,username,password,dob,time) values($1,$2,$3,$4,$5,now())",
       [firstdata, fullname, username, hashPass, dob]
     );
-// console.log("hello");
+    // console.log("hello");
     let userid = await pool.query(
       "select userid from userdetails where username=$1",
       [username]
     );
     let token = createTokens({ userid: userid.rows[0].userid });
     req.userid = userid.rows[0].userid;
-    await pool.query('update userdetails set token=$1 where userid=$2',[token,req.userid]);
+    await pool.query("update userdetails set token=$1 where userid=$2", [
+      token,
+      req.userid,
+    ]);
     res.status(200).json({ message: "Data inserted Successfully!" });
   } catch (error) {
     res.status(400).json({ message: "Error caught while inserting into db!" });

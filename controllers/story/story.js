@@ -23,7 +23,7 @@ let postStory = (req, res) => {
 
   const upload = multer({
     storage: storage,
-    limits: { fileSize: 1024*1024*10 },
+    limits: { fileSize: 1024 * 1024 * 10 },
     fileFilter: function (req, file, cb) {
       checkFileType(file, cb);
     },
@@ -55,24 +55,19 @@ let postStory = (req, res) => {
         let tags = req.body.tags;
         tags = tags.replace(/\"/g, "");
         tags = tags.split(",");
-        pool.query(
-          "insert into archieve(userid,urllink,tagid,time) values($1,$2,$3,$4)",
-          [
-            req.userid,
-            url.url,
-            tags,
-            new Date(),
-          ]
-        )
-        .then(()=>{
-          fs.unlinkSync(req.file.path);
-          res.status(200).json({ message: "story updated successfully!" });  
-        })
-       
-         } catch (error) {
+        pool
+          .query(
+            "insert into archieve(userid,urllink,tagid,time) values($1,$2,$3,$4)",
+            [req.userid, url.url, tags, new Date()]
+          )
+          .then(() => {
+            fs.unlinkSync(req.file.path);
+            res.status(200).json({ message: "story updated successfully!" });
+          });
+      } catch (error) {
         res.status(401).json({ message: "error in uploading story!" });
       }
-    } 
+    }
   });
 };
 

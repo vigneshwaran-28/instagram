@@ -6,12 +6,10 @@ const getFollowing = async (req, res) => {
       "select userdetails.userid,userdetails.fullname from userdetails where userdetails.userid in (select followingid from follow where followerid=$1)",
       [req.userid]
     );
-    res
-      .status(200)
-      .json({
-        message: "following retreived successfully!",
-        following: following.rows,
-      });
+    res.status(200).json({
+      message: "following retreived successfully!",
+      following: following.rows,
+    });
   } catch (error) {
     res.status(400).json({ message: "Error in retreiving the following!" });
   }

@@ -2,7 +2,7 @@ const pool = require("../../models/db");
 
 const updateBio = async (req, res) => {
   try {
-    const  {bio}  = req.body;
+    const { bio } = req.body;
     await pool.query("update profile set bio=$1 where userid=$2", [
       bio,
       req.userid,

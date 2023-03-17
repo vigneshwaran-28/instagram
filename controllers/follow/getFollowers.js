@@ -8,7 +8,10 @@ const getFollowers = async (req, res) => {
     );
     res
       .status(200)
-      .json({ message: "followers retreived successfully!", followers:followers.rows });
+      .json({
+        message: "followers retreived successfully!",
+        followers: followers.rows,
+      });
   } catch (error) {
     res.status(400).json({ message: "Error in retreiving the followers!" });
   }
