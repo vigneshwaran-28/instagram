@@ -70,6 +70,7 @@ const privatetype = require("../controllers/profile/privateType");
 const homePagePost = require("../controllers/homePage/getPost");
 const getEmoji = require("../public/getEmoji");
 const fetchUserStory=require('../controllers/story/fetchUserStory');
+const fetchUser=require('../elastic_search/searchUsers');
 
 let arr = [
   {
@@ -474,6 +475,12 @@ let arr = [
     middleware: [verifyToken],
     callBack: fetchUserStory,
   },
-];
+  {
+    type: "get",
+    endPoint: "/fetchUser",
+    middleware: [verifyToken],
+    callBack: fetchUser,
+  },
+]; 
 
 module.exports = arr;

@@ -1,6 +1,7 @@
 const pool = require("../../models/db");
 const bcrypt = require("bcrypt");
 const createTokens = require("../../utils/jwt/createToken");
+const insertUser=require('../../elastic_search/insertUsers');
 
 let signUp = async (req, res) => {
   const { firstdata, fullname, username, password, dob } = req.body;
@@ -19,6 +20,7 @@ let signUp = async (req, res) => {
       "select userid from userdetails where username=$1",
       [username]
     );
+      insertUser(result,firstdata,fullname,username,hashPass,dob);
     let token = createTokens({ userid: userid.rows[0].userid });
     req.userid = userid.rows[0].userid;
     await pool.query("update userdetails set token=$1 where userid=$2", [
