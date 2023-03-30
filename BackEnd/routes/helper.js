@@ -69,10 +69,17 @@ const publictype = require("../controllers/profile/publicType");
 const privatetype = require("../controllers/profile/privateType");
 const homePagePost = require("../controllers/homePage/getPost");
 const getEmoji = require("../public/getEmoji");
-const fetchUserStory=require('../controllers/story/fetchUserStory');
-const fetchUser=require('../elastic_search/searchUsers');
+const fetchUserStory = require("../controllers/story/fetchUserStory");
+const fetchUser = require("../elastic_search/searchUsers");
 
 let arr = [
+  {
+    type: "get",
+    endPoint: "/health",
+    callBack: (req, res) => {
+      res.send("health check");
+    },
+  },
   {
     type: "post",
     endPoint: "/signup",
@@ -94,7 +101,7 @@ let arr = [
     callBack: getOtp,
   },
   {
-    type: "get",
+    type: "post",
     endPoint: "/signin",
     callBack: signin,
   },
@@ -481,6 +488,6 @@ let arr = [
     middleware: [verifyToken],
     callBack: fetchUser,
   },
-]; 
+];
 
 module.exports = arr;

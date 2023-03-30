@@ -6,7 +6,7 @@ const createToken = require("../../utils/jwt/createToken");
 
 let signin = async (req, res) => {
   const { firstdata, password } = req.body;
-  let result = validateEmail(firstdata)
+  let result = validateEmail(firstdata) 
     ? "email"
     : validateMobNum(firstdata)
     ? "mobnum"
