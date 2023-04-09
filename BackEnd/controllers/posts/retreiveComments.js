@@ -11,9 +11,10 @@ const retreiveComment = async (req, res) => {
       .json({
         message: "comment retreived successfully!",
         comments: result.rows,
+        userid:req.userid
       });
   } catch (error) {
-    res.status(400).json({ message: "Erro =r in retreiving comments!" });
+    res.status(400).json({ message: "Error in retreiving comments!" });
   }
 };
 module.exports = retreiveComment;

@@ -8,9 +8,9 @@ const getPost = async (req, res) => {
     );
     res
       .status(200)
-      .json({ message: "post retreived successfully!", post: post.rows });
+      .json({ message: "post retreived successfully!", post: post.rows ,userid:req.userid });
   } catch (error) {
-    res.status(400).json({ message: "Error in retreiving the post!" });
+    res.status(400).json({ message: "Error in retreiving the post!"});
   }
 };
 
