@@ -28,7 +28,7 @@ let signin = async (req, res) => {
           "update userdetails set token=$1 where " + result + "=$2",
           [token, firstdata]
         );
-        res.status(200).json({ message: "Authorized user!" });
+        res.status(200).json({ message: "Authorized user!" ,token:token});
       } else {
         res.status(400).json({ message: "Incorrect password!" });
       }

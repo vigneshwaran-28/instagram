@@ -27,7 +27,7 @@ let signUp = async (req, res) => {
       token,
       req.userid,
     ]);
-    res.status(200).json({ message: "Data inserted Successfully!" });
+    res.status(200).json({ message: "Data inserted Successfully!",token:token });
   } catch (error) {
     res.status(400).json({ message: "Error caught while inserting into db!" });
   }
