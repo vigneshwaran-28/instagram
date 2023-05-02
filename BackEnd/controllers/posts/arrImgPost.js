@@ -56,13 +56,21 @@ let arrImgPost = (req, res) => {
     tags = tags.replace(/\"/g, "");
     tags = tags.split(",");
     let hashtag = hashTagFunction(req.body.caption);
-    pool.query(
+    await pool.query(
       "insert into post(userid,urllink,caption,hashtagcontent,tags,time) values($1,$2,$3,$4,$5,$6)",
-      [req.userid, resUrl, req.body.caption, hashtag, tags, new Date()],
-      (err, response) => {
-        if (err) console.log("error", err);
-      }
+      [req.userid, resUrl, req.body.caption, hashtag, tags, new Date()]
     );
+
+    let postid=await pool.query("select * from post where userid=$1 order by time desc",[req.userid]);
+    // console.log(postid.rows);
+    let q="insert into posttag values";
+   for(let i=0;i<tags.length;i++){
+    q+=("($1,$2,$"+(i+3)+")")+((i!=tags.length-1)?",":"");
+   }
+
+   pool.query(q,[req.userid,postid.rows[0].postid,...tags]);
+
+
     res.status(200).json({ message: "post updated successfully!" });
   }
 
@@ -92,3 +100,4 @@ let arrImgPost = (req, res) => {
 };
 
 module.exports = arrImgPost;
+ 

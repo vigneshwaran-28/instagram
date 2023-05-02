@@ -71,6 +71,7 @@ const homePagePost = require("../controllers/homePage/getPost");
 const getEmoji = require("../public/getEmoji");
 const fetchUserStory = require("../controllers/story/fetchUserStory");
 const fetchUser = require("../elastic_search/searchUsers");
+const suggestion=require("../controllers/suggestion/suggestion");
 
 let arr = [
   {
@@ -487,6 +488,12 @@ let arr = [
     endPoint: "/fetchUser",
     middleware: [verifyToken],
     callBack: fetchUser,
+  },
+  {
+    type: "get",
+    endPoint: "/suggestion",
+    middleware: [verifyToken],
+    callBack: suggestion,
   },
 ];
 
