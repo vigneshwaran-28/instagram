@@ -3,7 +3,7 @@ require("dotenv").config({ path: "../../.env" });
 
 const createTokens = (data) => {
   let res = sign(data, process.env.SECRET, {
-    expiresIn: "10d",
+    expiresIn: "40d",
   });
   return res;
 };

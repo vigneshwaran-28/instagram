@@ -1,5 +1,5 @@
 const express = require("express");
-const routes = require("./routes/auth");
+const routes = require("./routes/allRoutes");
 require("dotenv").config({ path: "./.env" });
 const pool=require('./models/db');
 const cors = require("cors");

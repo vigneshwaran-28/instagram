@@ -10,7 +10,7 @@ let imgPost = (req, res) => {
   cloudinary.config({
     cloud_name: process.env.api_cloud,
     api_key: process.env.api_key,
-    api_secret: process.env.api_secret,
+    api_secret: process.env.api_secret,  
   });
 
   const storage = multer.diskStorage({
@@ -24,14 +24,14 @@ let imgPost = (req, res) => {
 
   const upload = multer({
     storage: storage,
-    limits: { fileSize: 1024 * 1024 * 5 },
+    limits: { fileSize: 1024 * 1024 * 50},
     fileFilter: function (req, file, cb) {
       checkFileType(file, cb);
     },
   }).single("myImage");
 
   function checkFileType(file, cb) {
-    const fileTypes = /jpeg|jpg|png/;
+    const fileTypes = /jpeg|jpg|png|JPG|mp4/;
 
     const extname = fileTypes.test(
       path.extname(file.originalname).toLowerCase()
@@ -46,19 +46,26 @@ let imgPost = (req, res) => {
   }
 
   upload(req, res, async (err) => {
+    // console.log(req.file);
+
     if (err) res.status(400).json({ message: "Does not match!" });
     else {
       try {
+        // console.log(req.file);
         let url = await cloudinary.uploader.upload(req.file.path, {
-          resource_type: "image",
+          resource_type: "auto",
           folder: "Instagram/post/img",
         });
         let tags = req.body.tags;
         tags = tags.replace(/\"/g, "");
+        // console.log("piuhooo");
         let hashtag = hashTagFunction(req.body.caption);
+        // console.log("ohoooo");
+       
         tags = tags.split(",");
         let arrUrl = [];
         arrUrl.push(url.url);
+
         await pool.query(
           "insert into post(userid,urllink,caption,hashtagcontent,tags,time) values($1,$2,$3,$4,$5,$6)",
           [req.userid, arrUrl, req.body.caption, hashtag, tags, new Date()]

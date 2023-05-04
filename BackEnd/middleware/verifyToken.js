@@ -12,7 +12,7 @@ let verifyToken = (req, res, next) => {
         req.userid = output.userid;
         next();
       }
-    });
+    }); 
   } else {
     res.status(400).json({ message: "missing Token!" });
   }

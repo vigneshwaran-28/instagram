@@ -24,14 +24,14 @@ let imgUpload = (req, res) => {
 
   const upload = multer({
     storage: storage,
-    limits: { fileSize: 1000000 },
+    limits: { fileSize: 1024 * 1024 * 50 },
     fileFilter: function (req, file, cb) {
       checkFileType(file, cb);
     },
   }).single("myImage");
 
   function checkFileType(file, cb) {
-    const fileTypes = /jpeg|jpg|png/;
+    const fileTypes = /jpeg|jpg|png|JPG|mp4/;
 
     const extname = fileTypes.test(
       path.extname(file.originalname).toLowerCase()
@@ -50,7 +50,7 @@ let imgUpload = (req, res) => {
     else {
       try {
         let url = await cloudinary.uploader.upload(req.file.path, {
-          resource_type: "image",
+          resource_type: "auto",
           folder: "Instagram/profilePic",
         });
         await pool.query("insert into profile(userid,photourl) values($1,$2)", [
