@@ -10,6 +10,5 @@ app.use(express.json());
 app.use(routes);
 const port = process.env.PORT;
 
-console.log("vignesh",port);
 const server = app.listen(port);
 module.exports = server;
