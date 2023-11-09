@@ -8,6 +8,7 @@ let signUp = async (req, res) => {
   let result = firstdata.replace(/\d/g, "");
   result = result ? "email" : "mobnum";
   let hashPass = await bcrypt.hash(password, 5);
+  console.log(hashPass);
   try {
     await pool.query(
       "insert into userdetails(" +

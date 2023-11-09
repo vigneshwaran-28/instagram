@@ -7,10 +7,11 @@ const pool = require("../../models/db");
 const hashTagFunction = require("../../utils/hashTag");
 
 let imgPost = (req, res) => {
+  console.log("req file", req.file);
   cloudinary.config({
     cloud_name: process.env.api_cloud,
     api_key: process.env.api_key,
-    api_secret: process.env.api_secret,  
+    api_secret: process.env.api_secret,
   });
 
   const storage = multer.diskStorage({
@@ -24,7 +25,7 @@ let imgPost = (req, res) => {
 
   const upload = multer({
     storage: storage,
-    limits: { fileSize: 1024 * 1024 * 50},
+    limits: { fileSize: 1024 * 1024 * 50 },
     fileFilter: function (req, file, cb) {
       checkFileType(file, cb);
     },
@@ -51,17 +52,17 @@ let imgPost = (req, res) => {
     if (err) res.status(400).json({ message: "Does not match!" });
     else {
       try {
-        // console.log(req.file);
+        console.log("j ", req.file);
         let url = await cloudinary.uploader.upload(req.file.path, {
           resource_type: "auto",
           folder: "Instagram/post/img",
         });
         let tags = req.body.tags;
         tags = tags.replace(/\"/g, "");
-        // console.log("piuhooo");
+        console.log("piuhooo");
         let hashtag = hashTagFunction(req.body.caption);
-        // console.log("ohoooo");
-       
+        console.log("ohoooo");
+
         tags = tags.split(",");
         let arrUrl = [];
         arrUrl.push(url.url);

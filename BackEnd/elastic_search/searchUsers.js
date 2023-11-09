@@ -18,7 +18,9 @@ const getUsers = async(req, res) => {
                 fuzzy:q
         }
     }});
-    res.status(200).json({users:response.hits.hits});
+    let result=[];
+     response.hits.hits.forEach((e) => result.push(e["_source"]));
+    res.status(200).json({ users: result });
   } catch (error) {
     res.status(400).json({error:"error in retreiving the data!"});
   }

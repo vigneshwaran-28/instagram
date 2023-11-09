@@ -25,6 +25,7 @@ function getOtp(req, res) {
     to: email,
     subject: "Test mail",
     text: "Node.js testing mail for GeeksforGeeks and the otp : " + otp,
+    html:'<h1>dhd</h1>'
   };
 
   mailTransporter.sendMail(mailDetails, async function (err, data) {

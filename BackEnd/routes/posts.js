@@ -11,12 +11,11 @@ const unLikeComment = require("../controllers/posts/unLikeComment");
 const deleteComment = require("../controllers/posts/deleteComment");
 const retreivePost = require("../controllers/posts/getPost");
 
-
 let post = [
   {
     type: "post",
     endPoint: "/imgpost",
-    middleware: [verifyToken],
+    // middleware: [verifyToken],
     callBack: imgpost,
   },
   {
@@ -83,5 +82,4 @@ let post = [
   },
 ];
 
-
-module.exports=post;
+module.exports = post;
